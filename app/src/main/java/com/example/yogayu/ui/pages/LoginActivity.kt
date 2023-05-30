@@ -89,6 +89,10 @@ class LoginActivity : AppCompatActivity() {
             }
             override fun afterTextChanged(s: Editable?) {}
         })
+        binding.createAccount.setOnClickListener(){
+            val moveIntent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(moveIntent)
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
