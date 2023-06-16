@@ -47,15 +47,16 @@ class HomeFragment : Fragment() {
         )
 
         val textView: TextView = binding.tvGreeting
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
 
         homeViewModel.getToken().observe(this) {token ->
             if (!token.isEmpty()) {
                 homeViewModel.getListYogaLevels(token)
                 homeViewModel.listYogaLevels.observe(this) {listYogaLevels ->
                     setListYogaLevel(listYogaLevels)
+                }
+                homeViewModel.getUser(token)
+                homeViewModel.user.observe(this) {user ->
+                    textView.text = "Hi, ${user.name}!"
                 }
             }
         }

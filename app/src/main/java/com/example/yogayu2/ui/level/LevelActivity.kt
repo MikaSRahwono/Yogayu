@@ -11,6 +11,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.yogayu2.MainActivity
 import com.example.yogayu2.data.local.TokenPreferences
 import com.example.yogayu2.data.remote.response.LevelPoseResponseItem
 import com.example.yogayu2.databinding.ActivityLevelBinding
@@ -30,6 +31,8 @@ class LevelActivity : AppCompatActivity() {
         binding = ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar!!.hide()
+
         val id = intent.getIntExtra("id", 0)
         val levelName = intent.getStringExtra("level_name")
         binding.tvLevelName.text = levelName
@@ -46,6 +49,13 @@ class LevelActivity : AppCompatActivity() {
                 levelViewModel.listLevelPose.observe(this) {listLevelPose ->
                     setListStories(listLevelPose)
                 }
+            }
+        }
+
+        binding.btnBack.setOnClickListener { view ->
+            if (view.id == binding.btnBack.id) {
+                val intent = Intent(this@LevelActivity, MainActivity::class.java)
+                startActivity(intent)
             }
         }
     }
